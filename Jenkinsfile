@@ -39,14 +39,40 @@ pipeline {
 
             }
         }
+        stage('Install Ruby, Test Kitchen, and needed gems') {
+            steps {
+                script {
+                    sh 'sudo usermod -aG root,docker tomcat'
+                    sh 'sudo apt-get install rubygems -y'
+                    sh 'sudo apt-get install ruby-dev -y'
+                    sh 'sudo gem install bundler -v 2.0.1 --no-doc'
+                    sh 'bundle install'
+                }
+            }
+        }
+        stage('Loading Hardening Cookbook') {
+            steps {
+                git credentialsId: 'github', url: 'git@github.com:jasonnalewak/acme-app-pipeline.git'
+                script {
 
-        stage('Loading the Packer Hab Pkg') {
+                }
+            }
+        }
+
+/*         stage('Loading the Packer Hab Pkg') {
             steps {
                 script {
                     sh 'sudo hab svc load core/packer'
                 }
             }
         }
+        stage(''){
+            steps {
+                script{
+
+                }
+            }
+        } */
 /*         stage('Loading the Web App Hab Package') {
             steps {
                 script{
