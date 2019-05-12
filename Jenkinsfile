@@ -26,21 +26,23 @@ pipeline {
         stage('Installing Habitat') {
             steps {
                 script {
-                    def exists = false //need to test if the hab cli is working (>hab --version returns a good value)
+                    def exists = fileExists '/hab/'
                     if (exists) {
                         echo "Skipping Habitat install - already installed!"
+                        sh 'sudo hab sup run'  //ensure that the Hab supervisor is running
                     } else {
-                        sh 'sudo apt-get install -y curl'
+                        sh 'hostname'
+/*                         sh 'sudo apt-get install -y curl'
                         sh 'curl https://raw.githubusercontent.com/habitat-sh/habitat/master/components/hab/install.sh | sudo bash'
                         sh 'useradd hab'
-                        sh 'usermod -aG hab hab'
+                        sh 'usermod -aG hab hab' */
                     }
                 }
 
             }
         }
 
-        stage('Loading the Hab Package') {
+/*         stage('Loading the Hab Package') {
             steps {
                 script{
                     sh 'nohup sudo hab sup run $>/dev/null &'
@@ -61,18 +63,10 @@ pipeline {
             steps{
                 input 'Proceed with build?'
             }
-        }
-
-        stage('Push to Stable Channel in Builder') {
-            steps {
-                //promote package to stable channel
-            }
-        }
-
-        stage('')
+        } */
     }
     //post actions
-    post {
+/*     post {
         success {
         slackSend color: '#439FE0', message: "Build $JOB_NAME $BUILD_NUMBER was successful"
         }
@@ -80,6 +74,6 @@ pipeline {
             echo "Build Failed"
             mail  body: "Build ${env.JOB_NAME} ${env.BUILD_NUMBER} failed. Please check the build at ${env.JOB_URL}", from: 'admin@acme.com', subject: 'Build Failure', to: 'jnalewak@chef.io'
         }
-    }
+    } */
 
 }
