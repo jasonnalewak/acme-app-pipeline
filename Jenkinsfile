@@ -29,13 +29,11 @@ pipeline {
                     def exists = fileExists '/hab/'
                     if (exists) {
                         echo "Skipping Habitat install - already installed!"
-                        sh 'sudo hab sup run'  //ensure that the Hab supervisor is running
                     } else {
-                        sh 'hostname'
-/*                         sh 'sudo apt-get install -y curl'
+                        sh 'sudo apt-get install -y curl'
                         sh 'curl https://raw.githubusercontent.com/habitat-sh/habitat/master/components/hab/install.sh | sudo bash'
                         sh 'useradd hab'
-                        sh 'usermod -aG hab hab' */
+                        sh 'usermod -aG hab hab'
                     }
                 }
 
