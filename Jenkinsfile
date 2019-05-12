@@ -40,7 +40,14 @@ pipeline {
             }
         }
 
-/*         stage('Loading the Hab Package') {
+        stage('Loading the Packer Hab Pkg') {
+            steps {
+                script {
+                    sh 'sudo hab svc load core/packer'
+                }
+            }
+        }
+/*         stage('Loading the Web App Hab Package') {
             steps {
                 script{
                     sh 'nohup sudo hab sup run $>/dev/null &'
