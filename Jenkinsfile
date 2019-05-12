@@ -50,14 +50,14 @@ pipeline {
                 }
             }
         }
-        stage('Loading Hardening Cookbook') {
+/*         stage('Loading Hardening Cookbook') {
             steps {
                 git credentialsId: 'github', url: 'git@github.com:jasonnalewak/acme-app-pipeline.git'
                 script {
 
                 }
             }
-        }
+        } */
 
 /*         stage('Loading the Packer Hab Pkg') {
             steps {
