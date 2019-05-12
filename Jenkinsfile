@@ -45,10 +45,12 @@ pipeline {
                 git credentialsId: 'github', url: 'git@github.com:jasonnalewak/acme-app-pipeline.git'
             }
         }
-        
+
         stage('Install Ruby, Test Kitchen, and needed gems') {
             steps {
                 script {
+                    sh 'ls -la'
+                    sh 'pwd'
                     sh 'sudo usermod -aG root,docker tomcat'
                     sh 'sudo apt-get install rubygems -y'
                     sh 'sudo apt-get install ruby-dev -y'
