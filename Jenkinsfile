@@ -39,6 +39,13 @@ pipeline {
 
             }
         }
+
+        stage('Loading Hardening Cookbook') {
+            steps {
+                git credentialsId: 'github', url: 'git@github.com:jasonnalewak/acme-app-pipeline.git'
+            }
+        }
+        
         stage('Install Ruby, Test Kitchen, and needed gems') {
             steps {
                 script {
@@ -50,14 +57,6 @@ pipeline {
                 }
             }
         }
-/*         stage('Loading Hardening Cookbook') {
-            steps {
-                git credentialsId: 'github', url: 'git@github.com:jasonnalewak/acme-app-pipeline.git'
-                script {
-
-                }
-            }
-        } */
 
 /*         stage('Loading the Packer Hab Pkg') {
             steps {
